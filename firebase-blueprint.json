@@ -1,0 +1,197 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and financial data",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["artist", "admin", "content_manager", "finance_admin", "support"] },
+        "walletBalance": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "walletBalance"]
+    },
+    "Artist": {
+      "title": "Artist",
+      "description": "Artist profile linked to a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "instagramId": { "type": "string" },
+        "bio": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name"]
+    },
+    "Label": {
+      "title": "Label",
+      "description": "Music label linked to a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name"]
+    },
+    "Release": {
+      "title": "Release",
+      "description": "Song or Album release data",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "artist": { "type": "string" },
+        "singerName": { "type": "string" },
+        "instagramId": { "type": "string" },
+        "lyricist": { "type": "string" },
+        "lyrics": { "type": "string" },
+        "composer": { "type": "string" },
+        "producer": { "type": "string" },
+        "copyright": { "type": "string" },
+        "publisher": { "type": "string" },
+        "language": { "type": "string" },
+        "primaryGenre": { "type": "string" },
+        "secondaryGenre": { "type": "string" },
+        "releaseDate": { "type": "string" },
+        "releaseTime": { "type": "string" },
+        "label": { "type": "string" },
+        "releaseType": { "type": "string", "enum": ["Single", "EP", "Album"] },
+        "audioUrl": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "isrc": { "type": "string" },
+        "upc": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "in_progress", "live", "action_required", "rejected", "takedown_requested", "completed"] },
+        "adminNotes": { "type": "string" },
+        "platformLinks": { "type": "object" },
+        "selectedPlatforms": { "type": "array" },
+        "reviewedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "artist", "status"]
+    },
+    "Withdrawal": {
+      "title": "Withdrawal",
+      "description": "Funds withdrawal request",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "method": { "type": "string", "enum": ["UPI", "Bank"] },
+        "details": { "type": "object" },
+        "status": { "type": "string", "enum": ["pending", "completed", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "amount", "method", "status"]
+    },
+    "OACRequest": {
+      "title": "OACRequest",
+      "description": "Official Artist Channel request",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "artistId": { "type": "string" },
+        "channelUrl": { "type": "string" },
+        "topicUrl": { "type": "string" },
+        "vevoUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "artistId", "channelUrl", "status"]
+    },
+    "ContentIDRequest": {
+      "title": "ContentIDRequest",
+      "description": "YouTube Content ID whitelist or removal request",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "releaseId": { "type": "string" },
+        "youtubeUrl": { "type": "string" },
+        "type": { "type": "string", "enum": ["whitelist", "removal"] },
+        "status": { "type": "string", "enum": ["pending", "completed", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "releaseId", "youtubeUrl", "status"]
+    },
+    "RoyaltyReport": {
+      "title": "RoyaltyReport",
+      "description": "Royalty report file metadata",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "reportUrl": { "type": "string" },
+        "period": { "type": "string" },
+        "amount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "reportUrl", "amount"]
+    },
+    "AdminLog": {
+      "title": "AdminLog",
+      "description": "Audit logs for admin actions",
+      "type": "object",
+      "properties": {
+        "adminId": { "type": "string" },
+        "action": { "type": "string" },
+        "targetId": { "type": "string" },
+        "details": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["adminId", "action", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/artists/{artistId}": {
+      "schema": "Artist",
+      "description": "Artist profiles"
+    },
+    "/labels/{labelId}": {
+      "schema": "Label",
+      "description": "Music labels"
+    },
+    "/releases/{releaseId}": {
+      "schema": "Release",
+      "description": "Music releases and metadata"
+    },
+    "/withdrawals/{withdrawalId}": {
+      "schema": "Withdrawal",
+      "description": "Funds withdrawal requests"
+    },
+    "/oac_requests/{requestId}": {
+      "schema": "OACRequest",
+      "description": "OAC channel requests"
+    },
+    "/content_id_requests/{requestId}": {
+      "schema": "ContentIDRequest",
+      "description": "Content ID requests"
+    },
+    "/royalty_reports/{reportId}": {
+      "schema": "RoyaltyReport",
+      "description": "User royalty reports"
+    },
+    "/admin_logs/{logId}": {
+      "schema": "AdminLog",
+      "description": "Security and audit logs"
+    },
+    "/admins/{adminId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "uid": { "type": "string" }
+        }
+      },
+      "description": "List of admin UIDs"
+    }
+  }
+}
