@@ -102,7 +102,7 @@ export default function Home() {
               <div className="mt-2 font-display text-sm font-bold">100% Verified</div>
             </motion.div>
 
-            <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl bg-linear-to-br from-brand-blue/20 to-brand-purple/20 flex items-center justify-center">
+            <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-[0_0_100px_rgba(0,102,255,0.15)] group/record bg-linear-to-br from-brand-blue/20 to-brand-purple/20 flex items-center justify-center transition-all duration-1000 hover:scale-105 hover:shadow-[0_0_150px_rgba(0,102,255,0.3)]">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
@@ -111,8 +111,14 @@ export default function Home() {
                 <div className="w-full h-full bg-linear-to-br from-brand-blue to-brand-purple rounded-full p-1 shadow-2xl">
                    <div className="w-full h-full bg-brand-dark rounded-full flex items-center justify-center relative overflow-hidden group">
                       <Music className="text-white/20 w-32 h-32 absolute animate-pulse" />
-                      <div className="absolute inset-0 bg-radial-gradient from-transparent to-brand-dark/80"></div>
-                      <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full border border-white/20"></div>
+                      <div className="absolute inset-0 bg-[repeating-radial-gradient(circle,_transparent_0px,_transparent_2px,_rgba(255,255,255,0.02)_2px,_rgba(255,255,255,0.02)_3px)] opacity-60"></div>
+                       <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/10 to-transparent opacity-40 blur-[2px]"></div>
+                       <div className="absolute inset-0 bg-radial-gradient from-transparent to-brand-dark/95"></div>
+                      <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden">
+                        <div className="w-12 h-12 bg-linear-to-br from-brand-blue to-brand-purple rounded-full opacity-50 absolute animate-pulse"></div>
+                        <div className="w-4 h-4 bg-brand-dark rounded-full border border-white/10 relative z-10 shadow-inner"></div>
+                        <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/20 to-transparent shadow-[inset_0_0_20px_rgba(255,255,255,0.15)]"></div>
+                      </div>
                    </div>
                 </div>
               </motion.div>

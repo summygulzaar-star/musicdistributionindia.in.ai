@@ -19,7 +19,7 @@ import {
 import { formatCurrency, cn } from "../../lib/utils";
 import { Link } from "react-router-dom";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function Overview() {
   const { user, profile, isAdmin } = useAuth();
