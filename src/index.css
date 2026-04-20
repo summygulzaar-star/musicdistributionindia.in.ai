@@ -9,6 +9,10 @@
   --color-brand-purple: #9500FF;
   --color-brand-dark: #111111;
   --color-brand-light: #FAFAFA;
+  
+  --color-electric-blue: #00D4FF;
+  --color-neon-purple: #7B61FF;
+  --color-soft-orange: #FF8C42;
 }
 
 @layer base {

@@ -57,7 +57,42 @@ service cloud.firestore {
              data.createdAt is string;
     }
 
+    function isValidNotification(data) {
+      return data.title is string && data.title.size() <= 128 &&
+             data.message is string && data.message.size() <= 512 &&
+             data.type in ['info', 'warning', 'urgent'] &&
+             data.createdAt is string;
+    }
+
+    function isValidSupportTicket(data) {
+      return data.userId == request.auth.uid &&
+             data.subject is string && data.subject.size() <= 256 &&
+             data.message is string && data.message.size() <= 2048 &&
+             data.status in ['pending', 'resolved'] &&
+             data.createdAt is string;
+    }
+
     // --- Collection Rules ---
+
+    // Broadcast Notifications
+    match /system_notifications/{notificationId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin() && isValidNotification(incoming());
+    }
+
+    // Support Tickets
+    match /support_tickets/{ticketId} {
+      allow get: if isOwner(resource.data.userId) || isAdmin();
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && isValidSupportTicket(incoming()) && (incoming().userId == request.auth.uid);
+      allow update: if isAdmin();
+    }
+
+    // System Config
+    match /system/config {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
 
     // Users: Highly sensitive PII
     match /users/{userId} {

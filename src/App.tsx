@@ -6,6 +6,7 @@ import { auth, db } from "./lib/firebase";
 
 // Components
 import Home from "./pages/Home";
+import Features from "./pages/Features";
 import Auth from "./pages/Auth";
 import DashboardLayout from "./components/DashboardLayout";
 import Overview from "./pages/dashboard/Overview";
@@ -129,6 +130,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/features" element={<Features />} />
           <Route path="/auth" element={user ? <Navigate to="/dashboard" /> : <Auth />} />
           
           {/* Dashboard Routes */}

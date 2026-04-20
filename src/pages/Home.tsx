@@ -40,7 +40,7 @@ export default function Home() {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-widest text-brand-dark/60">
-          <a href="#features" className="hover:text-brand-blue transition-colors">Features</a>
+          <Link to="/features" className="hover:text-brand-blue transition-colors">Features</Link>
           <a href="#pricing" className="hover:text-brand-blue transition-colors">Pricing</a>
           <a href="#platforms" className="hover:text-brand-blue transition-colors">Platforms</a>
         </div>
@@ -226,8 +226,8 @@ export default function Home() {
           <div>
             <h4 className="font-display font-bold uppercase tracking-widest text-xs mb-6">Product</h4>
             <ul className="space-y-4 text-sm text-brand-dark/50 font-light">
-               <li><a href="#" className="hover:text-brand-blue">Distribution</a></li>
-               <li><a href="#" className="hover:text-brand-blue">Publishing</a></li>
+               <li><Link to="/features" className="hover:text-brand-blue">Features</Link></li>
+               <li><a href="#distribution" className="hover:text-brand-blue">Distribution</a></li>
                <li><a href="#" className="hover:text-brand-blue">Marketing</a></li>
             </ul>
           </div>
